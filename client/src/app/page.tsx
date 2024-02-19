@@ -1,32 +1,22 @@
 "use client";
 import Header from "@/components/header";
-import { useEffect, useState } from "react";
+import TextButton from "@/components/text_button";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [helloWorld, setHelloWorld] = useState("불러오는중....");
-
-  useEffect(() => {
-    const getHelloWorld = async () => {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_SERVER_URL || "http://127.0.0.1:8080",
-        {
-          method: "GET",
-        }
-      );
-      const result = await response.text();
-
-      setHelloWorld(result);
-    };
-
-    getHelloWorld();
-  }, []);
-
+  const router = useRouter();
   return (
     <div>
       <Header renderCenter={() => <div>메인 페이지</div>} />
 
-      <div className="flex justify-center items-center h-screen">
-        <div>{helloWorld}</div>
+      <div className="p-4">
+        <TextButton
+          text="step1으로 이동"
+          onClick={() => {
+            router.push("/step1");
+          }}
+          disabled={false}
+        />
       </div>
     </div>
   );
